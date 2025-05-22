@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using System;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
@@ -13,11 +14,12 @@ namespace RtsEcs
         private Stash<MovementComponent> MovementComponents;
         private Stash<CreateTankComponent> CreateTankComponents;
         private Stash<RoundMovingComponent> RoundMovingComponents;
+        private Stash<UnitComponent> UnitComponents;
 
         public World World { get; set; }
 
         private Filter Filter;
-        private UnitProvider Prefab;
+        private Tank Prefab;
 
         public void OnAwake()
         {
@@ -25,8 +27,9 @@ namespace RtsEcs
                 .With<CreateTankComponent>()
                 .Build();
 
-            Prefab = Resources.Load<UnitProvider>("Tank");
+            Prefab = Resources.Load<Tank>("Tank");
 
+            UnitComponents = World.GetStash<UnitComponent>();
             HealthComponents = World.GetStash<HealthComponent>();
             MovementComponents = World.GetStash<MovementComponent>();
             CreateTankComponents = World.GetStash<CreateTankComponent>();
@@ -39,14 +42,16 @@ namespace RtsEcs
             {
                 ref var createTank = ref CreateTankComponents.Get(entity);
 
-                var unit = GameObject.Instantiate(Prefab);
+                var unit = GameObject.Instantiate(Prefab, createTank.Position, createTank.Rotation);
 
-                unit.transform.position = createTank.Position;
-                unit.transform.rotation = createTank.Rotation;
-
-                HealthComponents.Add(unit.Entity);
-                ref var movementComponent = ref MovementComponents.Add(unit.Entity);
-                RoundMovingComponents.Add(unit.Entity);
+                UnitComponents.Add(entity, new UnitComponent()
+                {
+                    Gun = unit.Gun,
+                    Transform = unit.transform,
+                });
+                HealthComponents.Add(entity);
+                ref var movementComponent = ref MovementComponents.Add(entity);
+                RoundMovingComponents.Add(entity);
                 movementComponent.MovementVector = unit.transform.forward;
 
                 CreateTankComponents.Remove(entity);

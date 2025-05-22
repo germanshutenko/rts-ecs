@@ -20,7 +20,7 @@ public sealed class UnitListInitializer : IInitializer
 
         UnitListComponent.Set(entity, new UnitRepositoryComponent()
         {
-            Units = new List<UnitProvider>(),
+            Units = new List<UnitComponent>(),
         });
     }
 

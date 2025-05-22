@@ -9,6 +9,6 @@ namespace RtsEcs
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct AddUnitToRepositoryComponent : IComponent
     {
-        public UnitProvider UnitToAdd;
+        public UnitComponent UnitToAdd;
     }
 }

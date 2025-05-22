@@ -149,7 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4867895031359794349}
-  - component: {fileID: 6013631891070149665}
+  - component: {fileID: -5670421077838783900}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -174,7 +174,7 @@ Transform:
   - {fileID: 4183004448365508008}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6013631891070149665
+--- !u!114 &-5670421077838783900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,12 +183,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4723954381487188016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac83895835034d4a9368e732492cef6, type: 3}
+  m_Script: {fileID: 11500000, guid: 17201173aad503840867cb9f3071febf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializedData:
-    Gun: {fileID: 4183004448365508008}
-    Transform: {fileID: 4867895031359794349}
+  Gun: {fileID: 4183004448365508008}
 --- !u!1 &6299348328904337962
 GameObject:
   m_ObjectHideFlags: 0
